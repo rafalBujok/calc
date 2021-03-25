@@ -1,4 +1,5 @@
 <div class="calculator">
+    <input type="text" class="calculator-screen" [value]="actions" disabled />
     <input type="text" class="calculator-screen" [value]="currentNumber" disabled />
     <div class="calculator-keys">
         <button type="button" class="operator" value="+" (click)="getOperation('+')">+</button>
