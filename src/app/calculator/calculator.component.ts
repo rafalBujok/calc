@@ -56,7 +56,7 @@ export class CalculatorComponent implements OnInit {
       this.actions = this.firstOperand + this.operatorFirst;
     }
     if (this.firstOperand && this.secondOperand) {
-      console.log(this.firstOperand, this.secondOperand, this.operatorFirst, this.operatorSecond);
+
       this.operatorSecond = op;
       this.actions = this.firstOperand + this.operatorFirst + this.secondOperand + this.operatorSecond;
       this.currentNumber = this._doOperation(this.firstOperand, this.secondOperand, this.operatorFirst).toString();
@@ -68,15 +68,20 @@ export class CalculatorComponent implements OnInit {
       this.numberComplated = false;
     }
     this.waitForSecondNumber = true;
-    console.log(this.firstOperand, this.secondOperand, this.operatorFirst, this.operatorSecond);
+
   }
   getResult() {
-    console.log(this.firstOperand, this.secondOperand, this.operatorFirst, this.operatorSecond, this.currentNumber);
-    this.secondOperand = this.currentNumber;
-    this.actions = this.firstOperand + this.operatorFirst + this.secondOperand + '=';
-    this.currentNumber = this._doOperation(this.firstOperand, this.secondOperand, this.operatorFirst).toString();
-    this.numberComplated = false;
 
+    if (!this.firstOperand) {
+      this.actions = this.currentNumber + '='
+    } else {
+      this.secondOperand = this.currentNumber;
+      this.actions = this.firstOperand + this.operatorFirst + this.secondOperand + '=';
+      this.currentNumber = this._doOperation(this.firstOperand, this.secondOperand, this.operatorFirst).toString();
+      this.numberComplated = false;
+
+    }
+    this.waitForSecondNumber = true;
   }
   private _doOperation(firstOperand: string, secondOperand: string, operator: string): number {
     let result = 0;

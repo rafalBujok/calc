@@ -1,9 +1,9 @@
 <div class="calculator">
-    <input type="text" class="calculator-screen" [value]="actions" disabled />
+    <input type="text" class="calculator-screen" [value]="actions|display" disabled />
     <input type="text" class="calculator-screen" [value]="currentNumber" disabled />
     <div class="calculator-keys">
-        <button type="button" class="operator" value="+" (click)="getOperation('+')">+</button>
-        <button type="button" class="operator" value="-" (click)="getOperation('-')">-</button>
+        <button type="button" class="operator" value="+" (click)="getOperation('+')">&#x2b;</button>
+        <button type="button" class="operator" value="-" (click)="getOperation('-')">&minus;</button>
         <button type="button" class="operator" value="*" (click)="getOperation('*')">&times;</button>
         <button type="button" class="operator" value="/" (click)="getOperation('/')">&divide;</button>
         <button type="button" value="7" (click)="getNumber('7')">7</button>
