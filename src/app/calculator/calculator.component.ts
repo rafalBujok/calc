@@ -32,12 +32,19 @@ export class CalculatorComponent implements OnInit {
     }
   }
   public getDecimal(): void {
+    if (this.waitForSecondNumber) {
+      this.currentNumber = '0' + '.';
+      this.waitForSecondNumber = false;
+    }
+    this.numberComplated = true;
+    this.waitForSecondNumber = false;
     if (!this.currentNumber.includes('.')) {
       this.currentNumber += '.';
     }
   }
 
   public getOperation(op: string): void {
+    this._removeDecimal();
     if (!this.numberComplated && !this.firstOperand) {
       this.firstOperand = '0';
       this.actions = this.firstOperand;
@@ -78,6 +85,7 @@ export class CalculatorComponent implements OnInit {
     this.waitForSecondNumber = true;
   }
   public getResult(): void {
+    this._removeDecimal();
     if (!this.firstOperand) {
       this.actions = this.currentNumber + '=';
     } else {
@@ -110,6 +118,7 @@ export class CalculatorComponent implements OnInit {
     operator: string
   ): number {
     let result = 0;
+    this._removeDecimal();
     switch (operator) {
       case '+':
         return (result = Number(firstOperand) + Number(secondOperand));
@@ -161,6 +170,11 @@ export class CalculatorComponent implements OnInit {
         return this.back();
       case 'Delete':
         return this.clear();
+    }
+  }
+  private _removeDecimal() {
+    if (this.currentNumber.charAt(this.currentNumber.length - 1) === '.') {
+      this.currentNumber = this.currentNumber.slice(0, -1);
     }
   }
 
