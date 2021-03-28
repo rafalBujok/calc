@@ -3,20 +3,17 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-calculator',
   templateUrl: './calculator.component.html',
-  styleUrls: ['./calculator.component.scss']
+  styleUrls: ['./calculator.component.scss'],
 })
 export class CalculatorComponent implements OnInit {
-
-  actions: string = '';
+  actions = '';
   currentNumber = '0';
   operatorFirst: string = null;
   operatorSecond: string = null;
   firstOperand: string = null;
   secondOperand: string = null;
-  numberComplated: boolean = false;
-  waitForSecondNumber: boolean = false;
-
-
+  numberComplated = false;
+  waitForSecondNumber = false;
 
   public getNumber(num: string): void {
     this.numberComplated = true;
@@ -36,7 +33,6 @@ export class CalculatorComponent implements OnInit {
   }
 
   public getOperation(op: string): void {
-
     if (!this.numberComplated && !this.firstOperand) {
       this.firstOperand = '0';
       this.actions = this.firstOperand;
@@ -56,10 +52,17 @@ export class CalculatorComponent implements OnInit {
       this.actions = this.firstOperand + this.operatorFirst;
     }
     if (this.firstOperand && this.secondOperand) {
-
       this.operatorSecond = op;
-      this.actions = this.firstOperand + this.operatorFirst + this.secondOperand + this.operatorSecond;
-      this.currentNumber = this._doOperation(this.firstOperand, this.secondOperand, this.operatorFirst).toString();
+      this.actions =
+        this.firstOperand +
+        this.operatorFirst +
+        this.secondOperand +
+        this.operatorSecond;
+      this.currentNumber = this._doOperation(
+        this.firstOperand,
+        this.secondOperand,
+        this.operatorFirst
+      ).toString();
       this.actions = this.currentNumber + op;
       this.operatorFirst = this.operatorSecond;
       this.operatorSecond = null;
@@ -68,32 +71,49 @@ export class CalculatorComponent implements OnInit {
       this.numberComplated = false;
     }
     this.waitForSecondNumber = true;
-
   }
-  getResult() {
-
+  public getResult(): void {
     if (!this.firstOperand) {
-      this.actions = this.currentNumber + '='
+      this.actions = this.currentNumber + '=';
     } else {
       this.secondOperand = this.currentNumber;
-      this.actions = this.firstOperand + this.operatorFirst + this.secondOperand + '=';
-      this.currentNumber = this._doOperation(this.firstOperand, this.secondOperand, this.operatorFirst).toString();
+      this.actions =
+        this.firstOperand + this.operatorFirst + this.secondOperand + '=';
+      this.currentNumber = this._doOperation(
+        this.firstOperand,
+        this.secondOperand,
+        this.operatorFirst
+      ).toString();
       this.numberComplated = false;
-
     }
     this.waitForSecondNumber = true;
   }
-  private _doOperation(firstOperand: string, secondOperand: string, operator: string): number {
+  public back(): void {
+    if (this.actions !== '') {
+      this.actions = '';
+    } else {
+      if (this.currentNumber.length === 1) {
+        this.currentNumber = '0';
+      } else if (this.currentNumber.length > 1) {
+        this.currentNumber = this.currentNumber.slice(0, -1);
+      }
+    }
+  }
+  private _doOperation(
+    firstOperand: string,
+    secondOperand: string,
+    operator: string
+  ): number {
     let result = 0;
     switch (operator) {
       case '+':
-        return result = (Number(firstOperand) + Number(secondOperand));
+        return (result = Number(firstOperand) + Number(secondOperand));
       case '-':
-        return result = (Number(firstOperand) - Number(secondOperand));
+        return (result = Number(firstOperand) - Number(secondOperand));
       case '*':
-        return result = (Number(firstOperand) * Number(secondOperand));
+        return (result = Number(firstOperand) * Number(secondOperand));
       case '/':
-        return result = (Number(firstOperand) / Number(secondOperand));
+        return (result = Number(firstOperand) / Number(secondOperand));
     }
   }
 
@@ -107,9 +127,7 @@ export class CalculatorComponent implements OnInit {
     this.numberComplated = false;
     this.waitForSecondNumber = false;
   }
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
