@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-calculator',
@@ -14,6 +14,11 @@ export class CalculatorComponent implements OnInit {
   secondOperand: string = null;
   numberComplated = false;
   waitForSecondNumber = false;
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    this._getPressedKey(event);
+  }
 
   public getNumber(num: string): void {
     this.numberComplated = true;
@@ -114,6 +119,48 @@ export class CalculatorComponent implements OnInit {
         return (result = Number(firstOperand) * Number(secondOperand));
       case '/':
         return (result = Number(firstOperand) / Number(secondOperand));
+    }
+  }
+  private _getPressedKey(event: KeyboardEvent): void {
+    switch (event.key) {
+      case '+':
+        return this.getOperation('+');
+      case '*':
+        return this.getOperation('*');
+      case '/':
+        return this.getOperation('/');
+      case '-':
+        return this.getOperation('-');
+      case 'Enter':
+        return this.getResult();
+      case '.':
+        return this.getDecimal();
+      case ',':
+        return this.getDecimal();
+      case '0':
+        return this.getNumber('0');
+      case '1':
+        return this.getNumber('1');
+      case '2':
+        return this.getNumber('2');
+      case '3':
+        return this.getNumber('3');
+      case '4':
+        return this.getNumber('4');
+      case '5':
+        return this.getNumber('5');
+      case '6':
+        return this.getNumber('6');
+      case '7':
+        return this.getNumber('7');
+      case '8':
+        return this.getNumber('8');
+      case '9':
+        return this.getNumber('9');
+      case 'Backspace':
+        return this.back();
+      case 'Delete':
+        return this.clear();
     }
   }
 
