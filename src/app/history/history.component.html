@@ -1,0 +1,4 @@
+<div *ngFor="let action of historyArray">
+  <p>{{ action | display }}</p>
+</div>
+<button (click)="removeHistory()">Clear History</button>

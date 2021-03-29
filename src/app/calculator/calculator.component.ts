@@ -14,6 +14,8 @@ export class CalculatorComponent implements OnInit {
   secondOperand: string = null;
   numberComplated = false;
   waitForSecondNumber = false;
+  sendString: string = '';
+  showHistory = false;
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -75,6 +77,13 @@ export class CalculatorComponent implements OnInit {
         this.secondOperand,
         this.operatorFirst
       ).toString();
+      // send this to history component
+      this.sendString =
+        this.firstOperand +
+        this.operatorFirst +
+        this.secondOperand +
+        '=' +
+        this.currentNumber;
       this.actions = this.currentNumber + op;
       this.operatorFirst = this.operatorSecond;
       this.operatorSecond = null;
@@ -97,6 +106,8 @@ export class CalculatorComponent implements OnInit {
         this.secondOperand,
         this.operatorFirst
       ).toString();
+      // send this to history component
+      this.sendString = this.actions + this.currentNumber;
       this.numberComplated = false;
     }
     this.waitForSecondNumber = true;
