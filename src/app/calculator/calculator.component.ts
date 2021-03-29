@@ -199,7 +199,7 @@ export class CalculatorComponent implements OnInit {
     this.numberComplated = false;
     this.waitForSecondNumber = false;
   }
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

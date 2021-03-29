@@ -1,20 +1,30 @@
 <div class="calculator">
-  <input
-    type="text"
-    class="calculator-screen"
-    [value]="actions | display"
-    disabled
-  />
-  <input
-    type="text"
-    class="calculator-screen"
-    [value]="currentNumber"
-    disabled
-  />
+  <app-history
+    [class.showHistory]="showHistory"
+    class="history"
+    [actionString]="sendString"
+  ></app-history>
+  <button class="showHistoryButton" (click)="showHistory = !showHistory">
+    History
+  </button>
+  <div (click)="showHistory = false">
+    <input
+      type="text"
+      class="calculator-screen"
+      [value]="actions | display"
+      disabled
+    />
+    <input
+      type="text"
+      class="calculator-screen"
+      [value]="currentNumber"
+      disabled
+    />
+  </div>
   <div class="calculator-keys">
     <button
       type="button"
-      class="operator buttonPlus"
+      class="calculatorButton operator buttonPlus"
       value="+"
       (click)="getOperation('+')"
     >
@@ -22,7 +32,7 @@
     </button>
     <button
       type="button"
-      class="operator buttonMinus"
+      class="calculatorButton operator buttonMinus"
       value="-"
       (click)="getOperation('-')"
     >
@@ -30,7 +40,7 @@
     </button>
     <button
       type="button"
-      class="operator buttonTimes"
+      class="calculatorButton operator buttonTimes"
       value="*"
       (click)="getOperation('*')"
     >
@@ -38,66 +48,125 @@
     </button>
     <button
       type="button"
-      class="operator buttonDivide"
+      class="calculatorButton operator buttonDivide"
       value="/"
       (click)="getOperation('/')"
     >
       &divide;
     </button>
-    <button type="button" class="button7" value="7" (click)="getNumber('7')">
+    <button
+      type="button"
+      class="calculatorButton button7"
+      value="7"
+      (click)="getNumber('7')"
+    >
       7
     </button>
-    <button type="button" class="button8" value="8" (click)="getNumber('8')">
+    <button
+      type="button"
+      class="calculatorButton button8"
+      value="8"
+      (click)="getNumber('8')"
+    >
       8
     </button>
-    <button type="button" class="button9" value="9" (click)="getNumber('9')">
+    <button
+      type="button"
+      class="calculatorButton button9"
+      value="9"
+      (click)="getNumber('9')"
+    >
       9
     </button>
-    <button type="button" class="button4" value="4" (click)="getNumber('4')">
+    <button
+      type="button"
+      class="calculatorButton button4"
+      value="4"
+      (click)="getNumber('4')"
+    >
       4
     </button>
-    <button type="button" class="button5" value="5" (click)="getNumber('5')">
+    <button
+      type="button"
+      class="calculatorButton button5"
+      value="5"
+      (click)="getNumber('5')"
+    >
       5
     </button>
-    <button type="button" class="button6" value="6" (click)="getNumber('6')">
+    <button
+      type="button"
+      class="calculatorButton button6"
+      value="6"
+      (click)="getNumber('6')"
+    >
       6
     </button>
-    <button type="button" class="button1" value="1" (click)="getNumber('1')">
+    <button
+      type="button"
+      class="calculatorButton button1"
+      value="1"
+      (click)="getNumber('1')"
+    >
       1
     </button>
-    <button type="button" class="button2" value="2" (click)="getNumber('2')">
+    <button
+      type="button"
+      class="calculatorButton button2"
+      value="2"
+      (click)="getNumber('2')"
+    >
       2
     </button>
-    <button type="button" class="button3" value="3" (click)="getNumber('3')">
+    <button
+      type="button"
+      class="calculatorButton button3"
+      value="3"
+      (click)="getNumber('3')"
+    >
       3
     </button>
-    <button type="button" class="button0" value="0" (click)="getNumber('0')">
+    <button
+      type="button"
+      class="calculatorButton button0"
+      value="0"
+      (click)="getNumber('0')"
+    >
       0
     </button>
     <button
       type="button"
-      class="buttonDecimal"
+      class="calculatorButton buttonDecimal"
       class="decimal"
       value="."
       (click)="getDecimal()"
     >
       .
     </button>
-    <button type="button" class="all-clear" value="all-clear" (click)="clear()">
+    <button
+      type="button"
+      class="calculatorButton all-clear"
+      value="all-clear"
+      (click)="clear()"
+    >
       AC
     </button>
-    <button type="button" class="backButton" value="Back" (click)="back()">
+    <button
+      type="button"
+      class="calculatorButton backButton"
+      value="Back"
+      (click)="back()"
+    >
       Back
     </button>
 
-    <button type="button" class="equal-sign" value="=" (click)="getResult()">
+    <button
+      type="button"
+      class="calculatorButton equal-sign"
+      value="="
+      (click)="getResult()"
+    >
       =
     </button>
   </div>
 </div>
-<button (click)="showHistory = !showHistory">show</button>
-<app-history
-  *ngIf="showHistory"
-  class="history"
-  [actionString]="sendString"
-></app-history>
