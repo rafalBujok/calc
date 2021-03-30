@@ -132,32 +132,31 @@ export class CalculatorComponent implements OnInit {
     this.lastButtonResult = true;
   }
   public back(): void {
-    if (this.actions !== '') {
+    if (this.currentNumber.length === 1 && this.currentNumber !== '0') {
+      this.currentNumber = '0';
+    } else if (this.currentNumber.length > 1) {
+      this.currentNumber = this.currentNumber.slice(0, -1);
+
+    } else if (this.currentNumber = '0') {
       this.actions = '';
-    } else {
-      if (this.currentNumber.length === 1) {
-        this.currentNumber = '0';
-      } else if (this.currentNumber.length > 1) {
-        this.currentNumber = this.currentNumber.slice(0, -1);
-      }
     }
   }
   private _doOperation(
     firstOperand: string,
     secondOperand: string,
     operator: string
-  ): number {
-    let result = 0;
+  ): string {
     this._removeDecimalIfLast();
+
     switch (operator) {
       case '+':
-        return (result = Number(firstOperand) + Number(secondOperand));
+        return (Number(firstOperand) + Number(secondOperand)).toString();
       case '-':
-        return (result = Number(firstOperand) - Number(secondOperand));
+        return (Number(firstOperand) - Number(secondOperand)).toString();
       case '*':
-        return (result = Number(firstOperand) * Number(secondOperand));
+        return (Number(firstOperand) * Number(secondOperand)).toString();
       case '/':
-        return (result = Number(firstOperand) / Number(secondOperand));
+        return (Number(firstOperand) / Number(secondOperand)).toString();
     }
   }
   private _getPressedKey(event: KeyboardEvent): void {
