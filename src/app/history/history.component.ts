@@ -14,6 +14,6 @@ export class HistoryComponent implements OnChanges {
     this.historyArray.push(this.actionString);
   }
   removeHistory() {
-    this.historyArray = [];
+    this.historyArray = [''];
   }
 }
