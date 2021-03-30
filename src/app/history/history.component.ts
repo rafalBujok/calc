@@ -12,7 +12,6 @@ export class HistoryComponent implements OnChanges {
 
   ngOnChanges() {
     this.historyArray.push(this.actionString);
-    console.log(this.historyArray);
   }
   removeHistory() {
     this.historyArray = [];

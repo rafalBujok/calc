@@ -4,6 +4,9 @@
   right: 0;
 }
 .historyList {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 420px;
 }
 
 .historyParagraph {
