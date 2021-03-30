@@ -16,6 +16,8 @@ export class CalculatorComponent implements OnInit {
   waitForSecondNumber = false;
   sendString: string = '';
   showHistory = false;
+  lastButtonResult: boolean = false;
+
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -23,13 +25,15 @@ export class CalculatorComponent implements OnInit {
   }
 
   public getNumber(num: string): void {
-    console.log('get num sta', this.operatorFirst,
-      this.operatorSecond,
-      this.firstOperand,
-      this.secondOperand,
-      this.numberComplated,
-      this.waitForSecondNumber,
-    )
+    if (this.lastButtonResult) {
+      this.actions = '';
+      this.lastButtonResult = false;
+      this.secondOperand = null;
+      this.firstOperand = null;
+      this.operatorFirst = null;
+      this.operatorSecond = null;
+    }
+
     this.numberComplated = true;
     if (this.waitForSecondNumber) {
       this.currentNumber = num;
@@ -39,13 +43,6 @@ export class CalculatorComponent implements OnInit {
     } else {
       this.currentNumber += num;
     }
-    console.log('get num end', this.operatorFirst,
-      this.operatorSecond,
-      this.firstOperand,
-      this.secondOperand,
-      this.numberComplated,
-      this.waitForSecondNumber,
-    )
   }
   public getDecimal(): void {
     if (this.waitForSecondNumber) {
@@ -60,13 +57,6 @@ export class CalculatorComponent implements OnInit {
   }
 
   public getOperation(op: string): void {
-    console.log('get opr sta', this.operatorFirst,
-      this.operatorSecond,
-      this.firstOperand,
-      this.secondOperand,
-      this.numberComplated,
-      this.waitForSecondNumber,
-    )
     this._removeDecimalIfLast();
     if (!this.numberComplated && !this.firstOperand) {
       this.firstOperand = '0';
@@ -113,23 +103,10 @@ export class CalculatorComponent implements OnInit {
       this.numberComplated = false;
     }
     this.waitForSecondNumber = true;
-
-    console.log('get opr end', this.operatorFirst,
-      this.operatorSecond,
-      this.firstOperand,
-      this.secondOperand,
-      this.numberComplated,
-      this.waitForSecondNumber,
-    )
+    this.lastButtonResult = false;
   }
+
   public getResult(): void {
-    console.log('get res sta', this.operatorFirst,
-      this.operatorSecond,
-      this.firstOperand,
-      this.secondOperand,
-      this.numberComplated,
-      this.waitForSecondNumber,
-    )
     this._removeDecimalIfLast();
     if (!this.firstOperand) {
       this.actions = this.currentNumber + '=';
@@ -152,13 +129,7 @@ export class CalculatorComponent implements OnInit {
       this.numberComplated = false;
     }
     this.waitForSecondNumber = true;
-    console.log('get res end', this.operatorFirst,
-      this.operatorSecond,
-      this.firstOperand,
-      this.secondOperand,
-      this.numberComplated,
-      this.waitForSecondNumber,
-    )
+    this.lastButtonResult = true;
   }
   public back(): void {
     if (this.actions !== '') {
