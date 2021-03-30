@@ -1,5 +1,7 @@
-<p class="historyParagraph" *ngIf="historyArray.length === 1">No History</p>
-<div class="historyList" *ngFor="let action of historyArray">
-  <p class="historyParagraph">{{ action | display }}</p>
+<div class="historyList">
+  <p class="historyParagraph" *ngIf="historyArray.length === 1">No History</p>
+  <div *ngFor="let action of historyArray">
+    <p class="historyParagraph">{{ action | display }}</p>
+  </div>
+  <button class="clearButton" (click)="removeHistory()">Clear History</button>
 </div>
-<button class="clearButton" (click)="removeHistory()">Clear History</button>
